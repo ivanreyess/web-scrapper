@@ -1,7 +1,6 @@
 package com.sv.webscrapper.service.impl;
 
 import com.sv.webscrapper.service.WebScrapperService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
@@ -10,7 +9,6 @@ import org.htmlunit.html.HtmlPage;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 @Service
