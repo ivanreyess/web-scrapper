@@ -21,7 +21,7 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		model.addAttribute("title", "Home");
-		return "index";
+		return "redirect:/ui/pages";
 	}
 
 	@GetMapping("/login")
