@@ -10,9 +10,12 @@ import com.sv.webscrapper.service.LinkService;
 import com.sv.webscrapper.service.PageService;
 import com.sv.webscrapper.service.WebScrapperService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class PageServiceImpl implements PageService {
     private final PageRepository pageRepository;
     private final LinkService linkService;
     private final WebScrapperService webScrapperService;
+
     @Override
     public Page savePage(UrlDTO urlDTO) {
 
@@ -37,6 +41,17 @@ public class PageServiceImpl implements PageService {
     @Override
     public List<PageResponseDto> findAll() {
         return pageRepository.findAll().stream().map(page -> PageResponseDto.builder()
+                .id(page.getId())
+                .name(page.getName())
+                .numberOfLinks(page.getLinkCount())
+                .build()).toList();
+    }
+
+    @Override
+    public List<PageResponseDto> findAllByUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<String> name = Optional.of(auth.getName());
+        return pageRepository.findAllByCreatedBy(name.orElse("")).stream().map(page -> PageResponseDto.builder()
                 .id(page.getId())
                 .name(page.getName())
                 .numberOfLinks(page.getLinkCount())

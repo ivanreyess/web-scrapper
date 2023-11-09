@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+	
+<head th:replace="~{fragments :: head}"></head>
+
+<body>
+	<div class="header" th:replace="~{fragments :: header}"></div>
+	<div class="body">
+	
+		<div sec:authorize="isAuthenticated()">
+
+		</div>
+		
+		<h1>Home</h1>
+	
+		<p></p>
+
+	</div>
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

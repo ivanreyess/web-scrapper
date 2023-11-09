@@ -20,6 +20,7 @@ public class LinkUIController {
     @GetMapping("/page/{id}")
     public String getLinks(Model model, @PathVariable Long id) {
         model.addAttribute("links", linkService.findAllByPage(Page.builder().id(id).build()));
+        model.addAttribute("title", "Links");
         return "link";
     }
 }

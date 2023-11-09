@@ -12,4 +12,6 @@ public interface PageService {
         Page savePage(UrlDTO urlDTO);
 
         List<PageResponseDto> findAll();
+
+        List<PageResponseDto> findAllByUserName();
 }

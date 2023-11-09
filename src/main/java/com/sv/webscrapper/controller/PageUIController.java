@@ -24,8 +24,9 @@ public class PageUIController {
 
     @GetMapping("")
     public String getPages(Model model) {
-        model.addAttribute("pages", pageService.findAll());
+        model.addAttribute("pages", pageService.findAllByUserName());
         model.addAttribute("urlForm", new UrlForm());
+        model.addAttribute("title", "Web Pages");
         return "page";
     }
 

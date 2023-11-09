@@ -12,4 +12,7 @@ public interface LinkService {
     List<LinkDTO> findAll();
 
     List<LinkDTO> findAllByPage(Page page);
+
+    List<LinkDTO> findAllByPageAndUserName(Page page);
+
 }

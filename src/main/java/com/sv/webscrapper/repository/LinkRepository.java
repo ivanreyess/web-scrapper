@@ -9,4 +9,5 @@ import java.util.List;
 public interface LinkRepository extends JpaRepository<Link, Long> {
 
     List<Link> findAllByPage(Page page);
+    List<Link> findAllByPageAndAndCreatedBy(Page page, String userName);
 }
