@@ -1,6 +1,8 @@
 package com.sv.webscrapper.service;
 
+import com.sv.webscrapper.domain.dto.ScrapedWebInfoDTO;
+
 public interface WebScrapperService {
 
-    void scrape(String url);
+    ScrapedWebInfoDTO scrape(String url);
 }

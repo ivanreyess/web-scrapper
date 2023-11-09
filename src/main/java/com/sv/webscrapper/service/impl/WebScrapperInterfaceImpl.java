@@ -1,5 +1,7 @@
 package com.sv.webscrapper.service.impl;
 
+import com.sv.webscrapper.domain.dto.ScrapedWebInfoDTO;
+import com.sv.webscrapper.domain.dto.ScrappedLinkDto;
 import com.sv.webscrapper.service.WebScrapperService;
 import lombok.extern.slf4j.Slf4j;
 import org.htmlunit.BrowserVersion;
@@ -16,28 +18,38 @@ import java.util.List;
 public class WebScrapperInterfaceImpl implements WebScrapperService {
 
     @Override
-    public void scrape(String url) {
+    public ScrapedWebInfoDTO scrape(String url) {
+        final WebClient webClient = getWebClient();
+        try {
+            HtmlPage page = webClient.getPage(url);
+            webClient.getCurrentWindow().getJobManager().removeAllJobs();
+            List<HtmlAnchor> anchors = page.getAnchors();
+            List<ScrappedLinkDto> scrappedLinkDtos = anchors.stream().filter(a -> a.getHrefAttribute().contains("http")).
+                    map(a -> ScrappedLinkDto.builder()
+                            .name("".equals(a.getFirstChild().asNormalizedText()) ? "No name info" : a.getFirstChild().asNormalizedText())
+                            .url(a.getHrefAttribute())
+                            .build()).toList();
+
+            return ScrapedWebInfoDTO.builder()
+                    .webPageName(page.getTitleText())
+                    .scrappedLinkDtos(scrappedLinkDtos)
+                    .build();
+
+        } catch (IOException e) {
+            log.error("An error occurred: " + e);
+            return ScrapedWebInfoDTO.builder().build();
+        } finally {
+            webClient.close();
+        }
+    }
+
+    private static WebClient getWebClient() {
         final WebClient webClient = new WebClient(BrowserVersion.CHROME);
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setJavaScriptEnabled(false);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);
-        try {
-            HtmlPage page = webClient.getPage(url);
-            webClient.getCurrentWindow().getJobManager().removeAllJobs();
-            List<HtmlAnchor> anchors = page.getAnchors();
-            anchors.stream().filter(a -> a.getHrefAttribute().contains("http")).forEach(a -> log.info(a.getHrefAttribute()));
-            anchors.stream().filter(a -> a.getHrefAttribute().contains("http")).forEach(a -> {
-                if ("".equals(a.getFirstChild().asNormalizedText())) log.info("No name info");
-                else log.info(a.getFirstChild().asNormalizedText());
-            });
-            log.info(page.getTitleText());
-        } catch (IOException e) {
-            log.error("An error occurred: " + e);
-        } finally {
-            webClient.close();
-        }
-
+        return webClient;
     }
 }
