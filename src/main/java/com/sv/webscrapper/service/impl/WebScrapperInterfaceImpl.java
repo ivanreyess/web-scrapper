@@ -26,7 +26,7 @@ public class WebScrapperInterfaceImpl implements WebScrapperService {
             List<HtmlAnchor> anchors = page.getAnchors();
             List<ScrappedLinkDto> scrappedLinkDtos = anchors.stream().filter(a -> a.getHrefAttribute().contains("http")).
                     map(a -> ScrappedLinkDto.builder()
-                            .name("".equals(a.getFirstChild().asNormalizedText()) ? "No name info" : a.getFirstChild().asNormalizedText())
+                            .name((null == a.getFirstChild() || "".equals(a.getFirstChild().asNormalizedText())) ? "No info" : a.getFirstChild().asNormalizedText())
                             .url(a.getHrefAttribute())
                             .build()).toList();
 

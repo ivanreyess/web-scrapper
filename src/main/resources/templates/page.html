@@ -12,9 +12,9 @@
     <br/>
     <br/>
     <div class="row">
-        <form>
+        <form action="#" th:action="@{/ui/pages/submit}" th:object="${urlForm}" method="post" >
             <div class="mb-3">
-                <input type="text" class="form-control" id="pageUrl" placeholder="url" aria-describedby="urlHelp">
+                <input th:field="*{link}" type="text" class="form-control" id="pageUrl" placeholder="url" aria-describedby="urlHelp">
                 <div id="urlHelp" class="form-text">Please enter a new url.</div>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
@@ -26,6 +26,7 @@
             <tr>
                 <th> Name </th>
                 <th> Total links </th>
+                <th> Action </th>
             </tr>
             </thead>
             <tbody>
