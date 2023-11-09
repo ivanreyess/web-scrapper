@@ -58,4 +58,4 @@ Run the following command to start the app.
 
 ### Accessing web app :star:
 
-*   http://localhost:3000/equipments/
+*   http://localhost:8080/
