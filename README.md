@@ -42,7 +42,8 @@ Contains various config file.
 * jdk 17
 * mysql db
 
-To run the application you must have a mysql instance up and running, database credentials can be changed under the /resources/application.properties file 
+To run the application you must have a mysql instance up and running, database credentials can be changed under the /resources/application.properties file.
+Default database name: db_web_scrapping. Please be aware changing database name could prevent sql script to run properly.
 
 ### Running  the application :star:
 
@@ -59,3 +60,10 @@ Run the following command to start the app.
 ### Accessing web app :star:
 
 *   http://localhost:8080/
+
+There is a sql script to create two default users, so you can access the app right away:
+* **username**: user@mail.com
+* **password**: user
+
+* **username**: user2@mail.com
+* **password**: user
