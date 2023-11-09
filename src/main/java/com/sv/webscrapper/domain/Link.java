@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sv.webscrapper.domain.dto.LinkDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
 
@@ -39,6 +40,10 @@ public class Link implements Serializable {
     }
 
     public static LinkDTO toDto(Link link) {
-        return LinkDTO.builder().build();
+        return LinkDTO.builder()
+                .id(link.getId())
+                .name(link.getName())
+                .url(link.getUrl())
+                .build();
     }
 }
