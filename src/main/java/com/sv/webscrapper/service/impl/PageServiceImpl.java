@@ -2,7 +2,6 @@ package com.sv.webscrapper.service.impl;
 
 import com.sv.webscrapper.domain.Link;
 import com.sv.webscrapper.domain.Page;
-import com.sv.webscrapper.domain.dto.PageDTO;
 import com.sv.webscrapper.domain.dto.PageResponseDto;
 import com.sv.webscrapper.domain.dto.ScrapedWebInfoDTO;
 import com.sv.webscrapper.domain.dto.UrlDTO;
@@ -37,7 +36,6 @@ public class PageServiceImpl implements PageService {
 
     @Override
     public List<PageResponseDto> findAll() {
-
         return pageRepository.findAll().stream().map(page -> PageResponseDto.builder()
                 .id(page.getId())
                 .name(page.getName())
