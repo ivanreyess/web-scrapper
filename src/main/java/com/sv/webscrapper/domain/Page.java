@@ -5,6 +5,11 @@ import com.sv.webscrapper.domain.dto.PageDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Formula;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Setter
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 public class Page implements Serializable {
 
     @Id
@@ -35,6 +41,22 @@ public class Page implements Serializable {
 
     @Formula(value = "(SELECT COUNT(*) FROM link l WHERE l.page_id = id)")
     private Long linkCount;
+
+    @Column(name = "created_date", nullable = false, updatable = false)
+    @CreatedDate
+    private long createdDate;
+
+    @Column(name = "modified_date")
+    @LastModifiedDate
+    private long modifiedDate;
+
+    @Column(name = "created_by")
+    @CreatedBy
+    private String createdBy;
+
+    @Column(name = "modified_by")
+    @LastModifiedBy
+    private String modifiedBy;
 
     public static Page toEntity(PageDTO pageDTO) {
         return Page.builder().build();

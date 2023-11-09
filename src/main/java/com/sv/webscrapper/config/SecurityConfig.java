@@ -21,14 +21,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Slf4j
 public class SecurityConfig {
 
-	public static final String DEVELOPER = "DEVELOPER";
+	public static final String DEVELOPER = "USER";
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		http
 			.authorizeHttpRequests(authConfig -> {
-				authConfig.requestMatchers(HttpMethod.GET, "/", "/login", "/error", "/login-error", "/logout", "/css/**", "/ui/**").permitAll();
+				authConfig.requestMatchers(HttpMethod.GET, "/", "/login", "/error", "/login-error", "/logout", "/css/**").permitAll();
 				authConfig.requestMatchers(HttpMethod.GET, "/user").hasRole("USER");
 				authConfig.requestMatchers(HttpMethod.GET, "/admin").hasRole("ADMIN");
 				authConfig.requestMatchers(HttpMethod.GET, "/developer").hasRole(DEVELOPER);
