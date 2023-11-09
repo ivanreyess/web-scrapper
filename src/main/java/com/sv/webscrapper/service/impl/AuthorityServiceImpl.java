@@ -35,4 +35,9 @@ public class AuthorityServiceImpl implements AuthorityService {
 	public void deleteAuthority(Authority authority) {
 		authorityRepository.delete(authority);
 	}
+
+	@Override
+	public AuthorityDto findByAuthority(String authority) {
+		return Authority.authorityEntityToDto(authorityRepository.findByAuthority(authority));
+	}
 }

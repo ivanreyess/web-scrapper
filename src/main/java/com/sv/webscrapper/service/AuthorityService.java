@@ -7,13 +7,16 @@ import java.util.List;
 
 public interface AuthorityService {
 
-    public AuthorityDto getAuthorityById(Integer id);
+    AuthorityDto getAuthorityById(Integer id);
 
-    public List<AuthorityDto> getAllAuthorities();
+    List<AuthorityDto> getAllAuthorities();
 
-    public AuthorityDto createAuthority(Authority authority);
+    AuthorityDto createAuthority(Authority authority);
 
-    public AuthorityDto updateAuthority(Authority authority);
+    AuthorityDto updateAuthority(Authority authority);
 
-    public void deleteAuthority(Authority authority);
+    void deleteAuthority(Authority authority);
+
+    AuthorityDto findByAuthority(String authority);
+
 }

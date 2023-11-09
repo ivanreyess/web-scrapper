@@ -28,7 +28,8 @@ public class SecurityConfig {
 		
 		http
 			.authorizeHttpRequests(authConfig -> {
-				authConfig.requestMatchers(HttpMethod.GET, "/", "/login", "/error", "/login-error", "/logout", "/css/**").permitAll();
+				authConfig.requestMatchers(HttpMethod.GET, "/", "/login", "/error", "/login-error", "/logout", "/css/**", "/ui/user").permitAll();
+				authConfig.requestMatchers(HttpMethod.POST,  "/ui/user").permitAll();
 				authConfig.requestMatchers(HttpMethod.GET, "/user").hasRole("USER");
 				authConfig.requestMatchers(HttpMethod.GET, "/admin").hasRole("ADMIN");
 				authConfig.requestMatchers(HttpMethod.GET, "/developer").hasRole(DEVELOPER);
@@ -38,7 +39,7 @@ public class SecurityConfig {
 			})
 			.formLogin(login -> {
 				login.loginPage("/login");
-				login.defaultSuccessUrl("/");
+				login.defaultSuccessUrl("/ui/pages");
 				login.failureUrl("/login-error");
 				}
 			)
