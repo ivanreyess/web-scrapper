@@ -3,9 +3,7 @@ package com.sv.webscrapper.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sv.webscrapper.domain.dto.PageDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,6 +13,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class Page implements Serializable {
 
     @Id
@@ -22,7 +22,11 @@ public class Page implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "url")
+    private String url;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "page")
     @JsonIgnoreProperties(value = { "page" }, allowSetters = true)

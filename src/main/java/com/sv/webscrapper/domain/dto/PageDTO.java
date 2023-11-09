@@ -3,5 +3,5 @@ package com.sv.webscrapper.domain.dto;
 import lombok.Builder;
 
 @Builder
-public record PageDTO(String name) {
+public record PageDTO(String url) {
 }

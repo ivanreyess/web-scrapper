@@ -3,9 +3,7 @@ package com.sv.webscrapper.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sv.webscrapper.domain.dto.LinkDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +11,8 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Link implements Serializable {
 
     @Id

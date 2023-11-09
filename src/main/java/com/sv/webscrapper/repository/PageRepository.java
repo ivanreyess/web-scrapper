@@ -2,6 +2,8 @@ package com.sv.webscrapper.repository;
 
 import com.sv.webscrapper.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PageRepository extends JpaRepository<Long, Page> {
+@Repository
+public interface PageRepository extends JpaRepository<Page, Long> {
 }

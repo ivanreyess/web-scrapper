@@ -1,8 +1,10 @@
 package com.sv.webscrapper.service;
 
-import org.springframework.data.domain.Page;
+import com.sv.webscrapper.domain.Page;
+import com.sv.webscrapper.domain.dto.PageDTO;
+import com.sv.webscrapper.domain.dto.UrlDTO;
 
 public interface PageService {
 
-    Page savePage(Page page);
+        Page savePage(UrlDTO urlDTO);
 }
